@@ -31,4 +31,8 @@ export default defineConfig({
       failOnError: true,
     },
   },
+
+  nitro: {
+    preset: "static",
+  },
 });
