@@ -19,20 +19,22 @@
 
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
+
 export default defineConfig({
+  vite: {
+    base: isGitHubPages ? "/pixel-build-labs/" : "/",
+  },
+
   tanstackStart: {
     server: { entry: "server" },
 
-    prerender: {
+    spa: {
       enabled: true,
-      autoSubfolderIndex: true,
-      autoStaticPathsDiscovery: true,
-      crawlLinks: true,
-      failOnError: true,
+      prerender: {
+        outputPath: "/_shell.html",
+        crawlLinks: false,
+      },
     },
-  },
-
-  nitro: {
-    preset: "static",
   },
 });
