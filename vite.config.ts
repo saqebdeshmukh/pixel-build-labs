@@ -20,7 +20,7 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { nitro } from "nitro/vite";
 
-const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
+const isGitHubPages = process.env.GITHUB_ACTIONS === "false";
 
 export default defineConfig({
   vite: {
