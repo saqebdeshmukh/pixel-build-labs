@@ -17,24 +17,22 @@
 //});
 
 
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
 
 export default defineConfig({
-  vite: {
-    base: isGitHubPages ? "/pixel-build-labs/" : "/",
-  },
+  base: isGitHubPages ? "/pixel-build-labs/" : "/",
 
-  tanstackStart: {
-    server: { entry: "server" },
+  plugins: [
+    react(),
+    tsconfigPaths(),
+  ],
 
-    spa: {
-      enabled: true,
-      prerender: {
-        outputPath: "/_shell.html",
-        crawlLinks: false,
-      },
-    },
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
   },
 });
