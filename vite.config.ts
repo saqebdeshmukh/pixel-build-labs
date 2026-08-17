@@ -20,20 +20,12 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { nitro } from "nitro/vite";
 
+const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
+
 export default defineConfig({
-  tanstackStart: {
-    server: { entry: "server" },
-
-    prerender: {
-      enabled: true,
-      autoSubfolderIndex: true,
-      autoStaticPathsDiscovery: true,
-      crawlLinks: true,
-      failOnError: true,
-    },
-  },
-
   vite: {
+    base: isGitHubPages ? "/pixel-build-labs/" : "/",
+
     plugins: [
       nitro({
         preset: "node-server",
@@ -44,5 +36,17 @@ export default defineConfig({
         },
       }),
     ],
+  },
+
+  tanstackStart: {
+    server: { entry: "server" },
+
+    prerender: {
+      enabled: true,
+      autoSubfolderIndex: true,
+      autoStaticPathsDiscovery: true,
+      crawlLinks: true,
+      failOnError: true,
+    },
   },
 });
