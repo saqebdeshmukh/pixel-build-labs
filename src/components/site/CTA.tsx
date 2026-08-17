@@ -27,7 +27,11 @@ export function CTA({
   className?: string;
 }) {
   return (
-    <Link to={to} hash={hash} className={cn(base, styles[variant], className)}>
+    <Link
+      to={to}
+      {...(hash ? { hash } : {})}
+      className={cn(base, styles[variant], className)}
+    >
       {children}
     </Link>
   );
