@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createFileRoute as _unused } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { PageHero } from "@/components/site/PageHero";
@@ -7,7 +6,6 @@ import { Reveal } from "@/components/site/Reveal";
 import { CTA } from "@/components/site/CTA";
 import { SERVICE_DETAILS, COMPANY } from "@/data/site";
 
-void _unused;
 
 const title = `Services — ${COMPANY.name}`;
 const description =
