@@ -39,10 +39,12 @@ jobs:
       - name: Build static website
         run: npm run build
 
-      - name: Show build output
+      - name: Verify static output
         run: |
-          echo "Build completed."
-          find .output -maxdepth 3 -type f | sort
+          test -f .output/public/index.html
+          echo "Static build successful"
+          echo "Generated files:"
+          find .output/public -maxdepth 3 -type f | sort
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -64,6 +66,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
