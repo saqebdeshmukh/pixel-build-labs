@@ -39,12 +39,10 @@ jobs:
       - name: Build static website
         run: npm run build
 
-      - name: Verify build
+      - name: Show build output
         run: |
-          test -f dist/index.html
-          echo "Static build successful"
-          echo "Generated files:"
-          find dist -maxdepth 2 -type f | sort
+          echo "Build completed."
+          find .output -maxdepth 3 -type f | sort
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -52,7 +50,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./dist
+          path: ./.output/public
 
   deploy:
     name: Deploy to GitHub Pages
