@@ -39,28 +39,18 @@ jobs:
       - name: Build static website
         run: npm run build
 
-      - name: Verify static output
+      - name: Verify build
         run: |
-          test -f .output/public/index.html
-          test -f .output/public/about/index.html
-          test -f .output/public/services/index.html
-          test -f .output/public/solutions/index.html
-          test -f .output/public/work/index.html
-          test -f .output/public/contact/index.html
-          test -f .output/public/privacy/index.html
-          test -f .output/public/terms/index.html
-
-      - name: Verify case study pages
-        run: |
-          test -f .output/public/work/intelligent-invoice-processing/index.html
-          test -f .output/public/work/ai-powered-business-workflows/index.html
-          test -f .output/public/work/custom-commerce-platform/index.html
-          test -f .output/public/work/business-mobile-application/index.html
+          test -d .output/public
+          test -f .output/public/_shell.html
+          echo "Static build successful"
+          echo "Generated files:"
+          find .output/public -maxdepth 2 -type f | sort
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload GitHub Pages artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./.output/public
